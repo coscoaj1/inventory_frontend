@@ -1,24 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
-
+import Admin from "./components/Admin";
+import { Flex, Spacer, Center, Text, Square, Box } from "@chakra-ui/react";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Flex color="black">
+      <Admin>
+        <Text>Box 1</Text>
+      </Admin>
+      <Square bg="blue.500" size="150px">
+        <Text>Box 2</Text>
+      </Square>
+      <Box flex="1" bg="tomato">
+        <Text>Box 3</Text>
+      </Box>
+    </Flex>
   );
 }
 
