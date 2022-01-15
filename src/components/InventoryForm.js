@@ -1,6 +1,8 @@
 import React from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
+import baseUrl from "../services/inventory";
 
 const InventorySchema = Yup.object().shape({
   product_name: Yup.string("Enter product name")
@@ -27,7 +29,17 @@ export default function InventoryForm({ createInventory }) {
         count: "",
       }}
       validationSchema={validationSchema}
-      onSubmit={}
+      onSubmit={async (values, { resetForm }) => {
+        const formData = newFormData();
+        formData.append("image", values.image);
+        formData.append("product_name", values.product_name);
+        formData.append("sku", values.sku);
+        formData.append("location", values.location);
+        formData.append("count", values.count);
+        const result = await axios.post(`${baseUrl}/post`, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+      }}
     ></Formik>
   );
 }
