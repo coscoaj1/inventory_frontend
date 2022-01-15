@@ -13,9 +13,7 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 
-export default function Inventory() {
-  const [data, setData] = useState();
-
+export default function Inventory({ inventory, handleDelete }) {
   const Cell = ({ item }) => {
     return (
       <Tr>
@@ -24,26 +22,23 @@ export default function Inventory() {
         <Td>{item.location}</Td>
         <Td>{item.count}</Td>
         <Td>
-          <IconButton>
+          <IconButton size="sm">
             <EditIcon />
           </IconButton>
         </Td>
         <Td>
-          <IconButton>
+          <IconButton
+            onClick={() => {
+              handleDelete(item.id);
+            }}
+            size="sm"
+          >
             <DeleteIcon />
           </IconButton>
         </Td>
       </Tr>
     );
   };
-
-  useEffect(() => {
-    axios.get("http://localhost:3001/api/inventory/all").then((response) => {
-      setData(response.data);
-    });
-  }, []);
-
-  console.log(data);
 
   return (
     <Box p={4}>
@@ -59,7 +54,7 @@ export default function Inventory() {
           </Tr>
         </Thead>
         <Tbody>
-          {data?.map((item) => (
+          {inventory?.map((item) => (
             <Cell key={item.id} item={item} />
           ))}
         </Tbody>
