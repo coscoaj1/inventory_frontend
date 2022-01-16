@@ -17,7 +17,7 @@ export default function Inventory({ inventory, handleDelete }) {
       <Tr>
         <Td>{item.product_name}</Td>
         <Td>
-          <img className="thumbnail" src={item.image} />
+          <img className="thumbnail" src={item.image} alt={item.product_name} />
         </Td>
         <Td>{item.sku}</Td>
         <Td>{item.location}</Td>

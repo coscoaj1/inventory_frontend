@@ -32,10 +32,14 @@ function App() {
       gap={4}
     >
       <GridItem rowSpan={2} colSpan={1}>
-        <Admin />
+        <Admin inventory={inventory} setInventory={setInventory} />
       </GridItem>
       <GridItem colSpan={4} rowSpan={2}>
-        <Inventory inventory={inventory} handleDelete={handleDelete} />
+        <Inventory
+          inventory={inventory}
+          setInventory={setInventory}
+          handleDelete={handleDelete}
+        />
       </GridItem>
     </Grid>
   );

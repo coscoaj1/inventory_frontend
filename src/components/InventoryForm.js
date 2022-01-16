@@ -16,7 +16,7 @@ const validationSchema = Yup.object().shape({
   count: Yup.number().min(1, "Too short!").required("Required"),
 });
 
-export default function InventoryForm({ createInventory }) {
+export default function InventoryForm({ inventory, setInventory }) {
   const ref = useRef();
   return (
     <Box p={4}>
@@ -48,7 +48,7 @@ export default function InventoryForm({ createInventory }) {
             headers: { "Content-Type": "multipart/form-data" },
           });
 
-          return result.data;
+          setInventory(inventory.concat(result.data));
         }}
       >
         {(props) => (
