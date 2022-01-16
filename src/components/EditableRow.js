@@ -1,13 +1,14 @@
 import React from "react";
 import { Tr, Td, IconButton, Button } from "@chakra-ui/react";
-import { SmallCloseIcon, CheckIcon } from "@chakra-ui/icons";
-
-function EditableRow({ item, setRowId, setEditInventory, editInventory }) {
+import { SmallCloseIcon } from "@chakra-ui/icons";
+import "../index.css";
+function EditableRow({ item, setRowId, editInventory, handleRowChange }) {
   return (
     <Tr className="tr">
       <Td>
         <input
-          onChange={setEditInventory}
+          className="editable"
+          onChange={handleRowChange}
           type="text"
           required="required"
           name="product_name"
@@ -19,7 +20,8 @@ function EditableRow({ item, setRowId, setEditInventory, editInventory }) {
       </Td>
       <Td>
         <input
-          onChange={setEditInventory}
+          className="editable"
+          onChange={handleRowChange}
           type="text"
           required="required"
           placeholder="sku"
@@ -29,7 +31,8 @@ function EditableRow({ item, setRowId, setEditInventory, editInventory }) {
       </Td>
       <Td>
         <input
-          onChange={setEditInventory}
+          className="editable"
+          onChange={handleRowChange}
           type="text"
           required="required"
           name="location"
@@ -38,7 +41,8 @@ function EditableRow({ item, setRowId, setEditInventory, editInventory }) {
       </Td>
       <Td>
         <input
-          onChange={setEditInventory}
+          className="editable"
+          onChange={handleRowChange}
           type="text"
           required="required"
           name="count"
@@ -46,12 +50,14 @@ function EditableRow({ item, setRowId, setEditInventory, editInventory }) {
         />
       </Td>
       <Td>
+        <Button type="submit" size="sm">
+          Save
+        </Button>
+      </Td>
+      <Td>
         <IconButton onClick={() => setRowId(null)} size="sm">
           <SmallCloseIcon />
         </IconButton>
-      </Td>
-      <Td>
-        <Button size="sm">Save</Button>
       </Td>
     </Tr>
   );

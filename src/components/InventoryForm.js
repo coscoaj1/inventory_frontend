@@ -4,7 +4,6 @@ import * as Yup from "yup";
 import axios from "axios";
 import { Box, Text, Button } from "@chakra-ui/react";
 import "../index.css";
-const baseUrl = "http://localhost:3001/api/inventory";
 
 const validationSchema = Yup.object().shape({
   product_name: Yup.string()
@@ -46,10 +45,13 @@ export default function InventoryForm({ inventory, setInventory }) {
           formData.append("sku", values.sku);
           formData.append("location", values.location);
           formData.append("count", values.count);
-          const result = await axios.post(`${baseUrl}`, formData, {
-            headers: { "Content-Type": "multipart/form-data" },
-          });
-
+          const result = await axios.post(
+            "http://localhost:3001/api/inventory",
+            formData,
+            {
+              headers: { "Content-Type": "multipart/form-data" },
+            }
+          );
           setInventory(inventory.concat(result.data));
         }}
       >

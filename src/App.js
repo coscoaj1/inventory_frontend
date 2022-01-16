@@ -31,7 +31,7 @@ function App() {
     }
   };
 
-  const handleEditInventory = (event) => {
+  const handleRowChange = (event) => {
     event.preventDefault();
     const fieldName = event.target.getAttribute("name");
     const fieldValue = event.target.value;
@@ -59,6 +59,7 @@ function App() {
           setEditInventory={setEditInventory}
           editInventory={editInventory}
           handleDelete={handleDelete}
+          handleRowChange={handleRowChange}
         />
       </GridItem>
     </Grid>

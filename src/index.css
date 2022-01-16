@@ -58,6 +58,7 @@ code {
   color: gray;
 }
 
-input ::placeholder {
-  text-align: left;
+.editable {
+  border: 1px solid lightgray;
+  padding: 1rem;
 }
