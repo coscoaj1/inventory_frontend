@@ -16,6 +16,9 @@ export default function Inventory({ inventory, handleDelete }) {
     return (
       <Tr>
         <Td>{item.product_name}</Td>
+        <Td>
+          <img className="thumbnail" src={item.image} />
+        </Td>
         <Td>{item.sku}</Td>
         <Td>{item.location}</Td>
         <Td>{item.count}</Td>
@@ -44,6 +47,7 @@ export default function Inventory({ inventory, handleDelete }) {
         <Thead>
           <Tr>
             <Th>Product</Th>
+            <Th>Thumbnail</Th>
             <Th>SKU</Th>
             <Th>Location</Th>
             <Th>Count</Th>
