@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import { Form, Formik, Field } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { Box, Text, Button } from "@chakra-ui/react";
-import { AttachmentIcon } from "@chakra-ui/icons";
 import "../index.css";
 const baseUrl = "http://localhost:3001/api/inventory";
 
@@ -18,7 +17,7 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function InventoryForm({ createInventory }) {
-  console.log(baseUrl);
+  const ref = useRef();
   return (
     <Box p={4}>
       <Text size="md">Enter new item</Text>
@@ -32,10 +31,11 @@ export default function InventoryForm({ createInventory }) {
         }}
         validationSchema={validationSchema}
         onSubmit={async (values, { resetForm }) => {
-          // setTimeout(() => {
-          //   alert("product added!");
-          //   resetForm();
-          // }, 2000);
+          setTimeout(() => {
+            alert("product added!");
+            ref.current.value = null;
+            resetForm();
+          }, 1000);
           const formData = new FormData();
           console.log(values.image);
           console.log(values.product_name);
@@ -47,6 +47,7 @@ export default function InventoryForm({ createInventory }) {
           const result = await axios.post(`${baseUrl}`, formData, {
             headers: { "Content-Type": "multipart/form-data" },
           });
+
           return result.data;
         }}
       >
@@ -84,6 +85,7 @@ export default function InventoryForm({ createInventory }) {
               Thumbnail Image
             </label>
             <input
+              ref={ref}
               type="file"
               id="image"
               name="image"
@@ -91,7 +93,7 @@ export default function InventoryForm({ createInventory }) {
                 props.setFieldValue("image", event.target.files[0]);
               }}
               accept="image/*"
-            ></input>
+            />
             <Button mt={4} type="submit" size="sm">
               Submit
             </Button>
