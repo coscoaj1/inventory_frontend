@@ -18,3 +18,13 @@ code {
   border-width: 1px;
   padding: 0 1rem;
 }
+
+.hidden {
+  display: none;
+}
+
+.label {
+  width: 100px;
+  border: lightgray;
+  border-width: 1px;
+}

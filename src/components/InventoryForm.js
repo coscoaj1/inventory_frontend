@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Formik, Field } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Text, Button } from "@chakra-ui/react";
+import { AttachmentIcon } from "@chakra-ui/icons";
 import "../index.css";
 const baseUrl = "http://localhost:3001/api/inventory";
 
@@ -23,6 +24,7 @@ export default function InventoryForm({ createInventory }) {
       <Text size="md">Enter new item</Text>
       <Formik
         initialValues={{
+          image: "",
           product_name: "",
           sku: "",
           location: "",
@@ -30,13 +32,18 @@ export default function InventoryForm({ createInventory }) {
         }}
         validationSchema={validationSchema}
         onSubmit={async (values, { resetForm }) => {
+          // setTimeout(() => {
+          //   alert("product added!");
+          //   resetForm();
+          // }, 2000);
           const formData = new FormData();
-          //   formData.append("image", values.image);
+          console.log(values.image);
+          console.log(values.product_name);
+          formData.append("image", values.image);
           formData.append("product_name", values.product_name);
           formData.append("sku", values.sku);
           formData.append("location", values.location);
           formData.append("count", values.count);
-          console.log(formData);
           const result = await axios.post(`${baseUrl}`, formData, {
             headers: { "Content-Type": "multipart/form-data" },
           });
@@ -73,7 +80,21 @@ export default function InventoryForm({ createInventory }) {
               placeholder="Enter count on hand."
               className="field"
             />
-            <button type="submit">Submit</button>
+            <label className="label" htmlFor="image">
+              Thumbnail Image
+            </label>
+            <input
+              type="file"
+              id="image"
+              name="image"
+              onChange={(event) => {
+                props.setFieldValue("image", event.target.files[0]);
+              }}
+              accept="image/*"
+            ></input>
+            <Button mt={4} type="submit" size="sm">
+              Submit
+            </Button>
           </Form>
         )}
       </Formik>
