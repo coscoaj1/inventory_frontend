@@ -20,7 +20,9 @@ export default function InventoryForm({ inventory, setInventory }) {
   const ref = useRef();
   return (
     <Box p={4}>
-      <Text size="md">Enter new item</Text>
+      <Text className="label" size="md">
+        Enter new item
+      </Text>
       <Formik
         initialValues={{
           image: "",
@@ -57,28 +59,28 @@ export default function InventoryForm({ inventory, setInventory }) {
               type="text"
               id="product_name"
               name="product_name"
-              placeholder="Enter product name"
+              placeholder="Item name"
               className="field"
             />
             <Field
               type="text"
               id="sku"
               name="sku"
-              placeholder="Enter sku"
+              placeholder="SKU"
               className="field"
             />
             <Field
               type="text"
               id="location"
               name="location"
-              placeholder="Enter location"
+              placeholder="Location"
               className="field"
             />
             <Field
               type="text"
               id="count"
               name="count"
-              placeholder="Enter count on hand."
+              placeholder="Count"
               className="field"
             />
             <label className="label" htmlFor="image">

@@ -6,6 +6,13 @@ import React, { useState, useEffect } from "react";
 
 function App() {
   const [inventory, setInventory] = useState();
+  const [editInventory, setEditInventory] = useState({
+    image: "",
+    product_name: "",
+    sku: "",
+    location: "",
+    count: "",
+  });
 
   useEffect(() => {
     inventoryService.getAll().then((inventory) => setInventory(inventory));
@@ -24,6 +31,17 @@ function App() {
     }
   };
 
+  const handleEditInventory = (event) => {
+    event.preventDefault();
+    const fieldName = event.target.getAttribute("name");
+    const fieldValue = event.target.value;
+
+    const newFormData = { ...editInventory };
+    newFormData[fieldName] = fieldValue;
+
+    setEditInventory(newFormData);
+  };
+
   return (
     <Grid
       h="200px"
@@ -38,6 +56,8 @@ function App() {
         <Inventory
           inventory={inventory}
           setInventory={setInventory}
+          setEditInventory={setEditInventory}
+          editInventory={editInventory}
           handleDelete={handleDelete}
         />
       </GridItem>

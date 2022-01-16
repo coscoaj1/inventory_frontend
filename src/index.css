@@ -24,19 +24,16 @@ code {
 }
 
 .label {
-  width: 100px;
   border: lightgray;
+  color: rgba(30, 30, 30, 0.7);
   border-width: 1px;
+  padding-bottom: 1rem;
 }
 
 .thumbnail {
   height: 50px;
   width: 50px;
   border-radius: 8px;
-}
-
-.tr {
-  position: relative;
 }
 
 .dropdown {
@@ -48,4 +45,19 @@ code {
 
 .disabled {
   color: lightgray;
+}
+
+.table-spacing tr {
+  padding: 0;
+  text-align: center;
+}
+
+.tr input {
+  padding: 0;
+  width: 80px;
+  color: gray;
+}
+
+input ::placeholder {
+  text-align: left;
 }

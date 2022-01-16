@@ -2,10 +2,20 @@ import React from "react";
 import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
 import { Tr, Td, IconButton } from "@chakra-ui/react";
 
-const ReadOnlyRow = ({ item, handleDelete, show, setRowId }) => {
+const ReadOnlyRow = ({ item, handleDelete, setRowId, setEditInventory }) => {
   const setData = () => {
     console.log(item);
     setRowId(item.id);
+
+    const formValues = {
+      image: item.image,
+      product_name: item.product_name,
+      sku: item.sku,
+      location: item.location,
+      count: item.count,
+    };
+
+    setEditInventory(formValues);
   };
   return (
     <Tr className="tr">

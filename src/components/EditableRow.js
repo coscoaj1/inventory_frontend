@@ -1,16 +1,17 @@
 import React from "react";
-import { Tr, Td, IconButton } from "@chakra-ui/react";
-import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
+import { Tr, Td, IconButton, Button } from "@chakra-ui/react";
+import { SmallCloseIcon, CheckIcon } from "@chakra-ui/icons";
 
-function EditableRow({ item }) {
+function EditableRow({ item, setRowId, setEditInventory, editInventory }) {
   return (
     <Tr className="tr">
       <Td>
         <input
+          onChange={setEditInventory}
           type="text"
           required="required"
-          placeholder="Enter product name"
           name="product_name"
+          value={editInventory.product_name}
         />
       </Td>
       <Td>
@@ -18,37 +19,39 @@ function EditableRow({ item }) {
       </Td>
       <Td>
         <input
+          onChange={setEditInventory}
           type="text"
           required="required"
-          placeholder="Enter sku"
+          placeholder="sku"
           name="sku"
+          value={editInventory.sku}
         />
       </Td>
       <Td>
         <input
+          onChange={setEditInventory}
           type="text"
           required="required"
-          placeholder="Enter location"
           name="location"
+          value={editInventory.location}
         />
       </Td>
       <Td>
         <input
+          onChange={setEditInventory}
           type="text"
           required="required"
-          placeholder="Enter count"
           name="count"
+          value={editInventory.count}
         />
       </Td>
       <Td>
-        <IconButton className="disabled" variant="disabled" size="sm">
-          <EditIcon />
+        <IconButton onClick={() => setRowId(null)} size="sm">
+          <SmallCloseIcon />
         </IconButton>
       </Td>
       <Td>
-        <IconButton className="disabled" variant="disabled" size="sm">
-          <DeleteIcon />
-        </IconButton>
+        <Button size="sm">Save</Button>
       </Td>
     </Tr>
   );
