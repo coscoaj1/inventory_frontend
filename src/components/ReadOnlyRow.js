@@ -4,7 +4,6 @@ import { Tr, Td, IconButton } from "@chakra-ui/react";
 
 const ReadOnlyRow = ({ item, handleDelete, setRowId, setEditInventory }) => {
   const setData = () => {
-    console.log(item);
     setRowId(item.id);
 
     const formValues = {

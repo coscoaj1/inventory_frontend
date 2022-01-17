@@ -1,5 +1,5 @@
 import axios from "axios";
-export const baseUrl = "http://localhost:3001/api/inventory";
+export const baseUrl = "https://inventory-app-crud.herokuapp.com/api/inventory";
 
 const getAll = () => {
   const request = axios.get(`${baseUrl}/all`);

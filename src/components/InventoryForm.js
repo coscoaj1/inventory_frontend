@@ -44,7 +44,7 @@ export default function InventoryForm({ inventory, setInventory }) {
           formData.set("location", values.location);
           formData.set("count", values.count);
           const result = await axios.post(
-            "http://localhost:3001/api/inventory",
+            "https://inventory-app-crud.herokuapp.com/api/inventory",
             formData,
             {
               headers: { "Content-Type": "multipart/form-data" },
