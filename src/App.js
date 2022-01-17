@@ -17,17 +17,13 @@ function App() {
   useEffect(() => {
     inventoryService.getAll().then((inventory) => setInventory(inventory));
   }, []);
-  console.log(inventory);
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id, awskey) => {
     const myInventory = inventory.find((i) => i.id === id);
-    console.log(myInventory);
     if (window.confirm(`Delete ${myInventory.product_name}?`)) {
       const filteredInventory = inventory.filter((i) => i.id !== id);
-      console.log(filteredInventory);
-      await inventoryService.remove(id);
+      await inventoryService.remove(id, awskey);
       setInventory(filteredInventory);
-      // setNotificationMessage(`Deleted ${blog.title}`);
     }
   };
 

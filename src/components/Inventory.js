@@ -28,7 +28,6 @@ export default function Inventory({
     };
 
     const result = await inventoryService.update(rowId, editedRow);
-    console.log(result);
     setInventory(inventory.map((item) => (item.id !== rowId ? item : result)));
     setRowId(null);
   };

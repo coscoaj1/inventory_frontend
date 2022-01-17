@@ -1,6 +1,5 @@
 import React from "react";
-import { Tr, Td, IconButton, Button } from "@chakra-ui/react";
-import { SmallCloseIcon } from "@chakra-ui/icons";
+import { Tr, Td, Button } from "@chakra-ui/react";
 import "../index.css";
 function EditableRow({ item, setRowId, editInventory, handleRowChange }) {
   return (
@@ -55,9 +54,9 @@ function EditableRow({ item, setRowId, editInventory, handleRowChange }) {
         </Button>
       </Td>
       <Td>
-        <IconButton onClick={() => setRowId(null)} size="sm">
-          <SmallCloseIcon />
-        </IconButton>
+        <Button onClick={() => setRowId(null)} size="sm">
+          Cancel
+        </Button>
       </Td>
     </Tr>
   );

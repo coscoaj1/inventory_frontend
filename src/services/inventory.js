@@ -17,8 +17,9 @@ const update = async (id, updatedItem) => {
   return response.data;
 };
 
-const remove = async (id) => {
-  const response = await axios.delete(`${baseUrl}/${id}`);
+const remove = async (id, awskey) => {
+  const response = await axios.delete(`${baseUrl}/${id}`, { data: awskey });
+  console.log(awskey);
   return response.data;
 };
 

@@ -27,14 +27,14 @@ const ReadOnlyRow = ({ item, handleDelete, setRowId, setEditInventory }) => {
       <Td>{item.location}</Td>
       <Td>{item.count}</Td>
       <Td>
-        <IconButton onClick={() => setData(item)}>
+        <IconButton onClick={() => setData(item)} size="sm">
           <EditIcon />
         </IconButton>
       </Td>
       <Td>
         <IconButton
           onClick={() => {
-            handleDelete(item.id);
+            handleDelete(item.id, item.awskey);
           }}
           size="sm"
         >

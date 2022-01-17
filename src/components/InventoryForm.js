@@ -38,8 +38,6 @@ export default function InventoryForm({ inventory, setInventory }) {
             resetForm();
           }, 1000);
           const formData = new FormData();
-          console.log(values.image);
-          console.log(values.product_name);
           formData.append("image", values.image);
           formData.append("product_name", values.product_name);
           formData.append("sku", values.sku);
