@@ -9,8 +9,8 @@ const validationSchema = Yup.object().shape({
   product_name: Yup.string()
     .min(2, "Too short!")
     .max(25, "Too Long!")
-    .required("Required"),
-  sku: Yup.number().typeError("must specify sku").required("Required"),
+    .required("Required!"),
+  sku: Yup.number().typeError("Must specify sku!").required("Required"),
   location: Yup.string().min(2, "Too short!").required("Required"),
   count: Yup.number().min(1, "Too short!").required("Required"),
 });
@@ -39,10 +39,10 @@ export default function InventoryForm({ inventory, setInventory }) {
           }, 1000);
           const formData = new FormData();
           formData.append("image", values.image);
-          formData.append("product_name", values.product_name);
-          formData.append("sku", values.sku);
-          formData.append("location", values.location);
-          formData.append("count", values.count);
+          formData.set("product_name", values.product_name);
+          formData.set("sku", values.sku);
+          formData.set("location", values.location);
+          formData.set("count", values.count);
           const result = await axios.post(
             "http://localhost:3001/api/inventory",
             formData,
@@ -62,6 +62,9 @@ export default function InventoryForm({ inventory, setInventory }) {
               placeholder="Item name"
               className="field"
             />
+            {props.errors.product_name && props.touched.product_name ? (
+              <div className="error-text">{props.errors.product_name}</div>
+            ) : null}
             <Field
               type="text"
               id="sku"
@@ -69,6 +72,9 @@ export default function InventoryForm({ inventory, setInventory }) {
               placeholder="SKU"
               className="field"
             />
+            {props.errors.sku && props.touched.sku ? (
+              <div className="error-text">{props.errors.sku}</div>
+            ) : null}
             <Field
               type="text"
               id="location"
@@ -76,6 +82,9 @@ export default function InventoryForm({ inventory, setInventory }) {
               placeholder="Location"
               className="field"
             />
+            {props.errors.location && props.touched.location ? (
+              <div className="error-text">{props.errors.location}</div>
+            ) : null}
             <Field
               type="text"
               id="count"
@@ -83,6 +92,9 @@ export default function InventoryForm({ inventory, setInventory }) {
               placeholder="Count"
               className="field"
             />
+            {props.errors.count && props.touched.count ? (
+              <div className="error-text">{props.errors.count}</div>
+            ) : null}
             <label className="label" htmlFor="image">
               Thumbnail Image
             </label>

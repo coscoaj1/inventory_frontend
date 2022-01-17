@@ -14,7 +14,7 @@ code {
 
 .field {
   border-color: lightgray;
-  margin-bottom: 1rem;
+  margin: 0.5rem 0;
   border-width: 1px;
   padding: 0 1rem;
 }
@@ -61,4 +61,8 @@ code {
 .editable {
   border: 1px solid lightgray;
   padding: 1rem;
+}
+
+.error-text {
+  color: red;
 }
