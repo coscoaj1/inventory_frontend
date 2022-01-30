@@ -7,7 +7,9 @@ export default function Admin({ inventory, setInventory }) {
     <Box w="200px" minHeight="lg">
       <List p={4}>
         <ListItem>
-          <Heading size="md">Inventory Tracker</Heading>
+          <Heading textAlign="center" size="md">
+            Inventory Tracker
+          </Heading>
         </ListItem>
       </List>
       <InventoryForm inventory={inventory} setInventory={setInventory} />

@@ -24,10 +24,11 @@ code {
 }
 
 .label {
-  border: lightgray;
   color: rgba(30, 30, 30, 0.7);
-  border-width: 1px;
   padding-bottom: 1rem;
+  text-align: center;
+  width: 100%;
+  display: block;
 }
 
 .thumbnail {
@@ -65,4 +66,16 @@ code {
 
 .error-text {
   color: red;
+}
+
+.box {
+  width: 250px;
+}
+
+.form {
+  width: 100%;
+}
+
+.submit {
+  margin-left: 2rem;
 }

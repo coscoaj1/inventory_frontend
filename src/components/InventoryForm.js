@@ -18,7 +18,7 @@ const validationSchema = Yup.object().shape({
 export default function InventoryForm({ inventory, setInventory }) {
   const ref = useRef();
   return (
-    <Box p={4}>
+    <Box className="box" display="flex" flexDirection="column" p={4}>
       <Text className="label" size="md">
         Enter new item
       </Text>
@@ -108,7 +108,7 @@ export default function InventoryForm({ inventory, setInventory }) {
               }}
               accept="image/*"
             />
-            <Button mt={4} type="submit" size="sm">
+            <Button mt={4} ml={16} type="submit" size="sm">
               Submit
             </Button>
           </Form>
