@@ -3,7 +3,6 @@ import ReadOnlyRow from "./ReadOnlyRow";
 import EditableRow from "./EditableRow";
 import "../index.css";
 import inventoryService from "../services/inventory";
-import { useQueryClient } from "react-query";
 import { useInventoryData, useDeleteItem } from "../services/useInventoryData";
 
 import { Table, Thead, Tr, Th, Tbody, Box } from "@chakra-ui/react";
@@ -16,7 +15,6 @@ export default function Inventory({
   handleRowChange,
 }) {
   const [rowId, setRowId] = useState(null);
-  const queryClient = useQueryClient();
 
   const onSuccess = (data) => {
     console.log("Perform side effect after fetching data", data);

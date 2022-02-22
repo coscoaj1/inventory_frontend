@@ -1,8 +1,7 @@
 import Admin from "./components/Admin";
 import { Grid, GridItem } from "@chakra-ui/react";
 import Inventory from "./components/Inventory";
-import inventoryService from "./services/inventory";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 const queryClient = new QueryClient();

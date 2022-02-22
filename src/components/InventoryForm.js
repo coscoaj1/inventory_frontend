@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import { Form, Formik, Field } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
 import { Box, Text, Button } from "@chakra-ui/react";
 import "../index.css";
 import { useAddItem } from "../services/useInventoryData";
@@ -18,9 +17,10 @@ const validationSchema = Yup.object().shape({
 
 export default function InventoryForm({ inventory, setInventory }) {
   const ref = useRef();
-  const handleSubmit = () => {
+  const UseHandleSubmit = (formData) => {
     useAddItem(formData);
   };
+
   return (
     <Box className="box" display="flex" flexDirection="column" p={4}>
       <Text className="label" size="md">
@@ -47,7 +47,7 @@ export default function InventoryForm({ inventory, setInventory }) {
           formData.set("sku", values.sku);
           formData.set("location", values.location);
           formData.set("count", values.count);
-          handleSubmit(formData);
+          UseHandleSubmit(formData);
           // const result = await axios.post(
           //   "https://inventory-app-crud.herokuapp.com/api/inventory",
           //   formData
