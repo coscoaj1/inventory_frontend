@@ -53,15 +53,16 @@ code {
   text-align: center;
 }
 
-.tr input {
+.tr input,
+.tr input:focus {
   padding: 0;
-  width: 80px;
+  width: 100px;
   color: gray;
 }
 
 .editable {
   border: 1px solid lightgray;
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
 .error-text {

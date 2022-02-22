@@ -3,6 +3,9 @@ import { Grid, GridItem } from "@chakra-ui/react";
 import Inventory from "./components/Inventory";
 import inventoryService from "./services/inventory";
 import React, { useState, useEffect } from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 
 function App() {
   const [inventory, setInventory] = useState();
@@ -13,52 +16,40 @@ function App() {
     location: "",
     count: "",
   });
-
-  useEffect(() => {
-    inventoryService.getAll().then((inventory) => setInventory(inventory));
-  }, []);
-
-  const handleDelete = async (id, awskey) => {
-    const myInventory = inventory.find((i) => i.id === id);
-    if (window.confirm(`Delete ${myInventory.product_name}?`)) {
-      const filteredInventory = inventory.filter((i) => i.id !== id);
-      await inventoryService.remove(id, awskey);
-      setInventory(filteredInventory);
-    }
-  };
+  //migrating to react-query
+  // useEffect(() => {
+  //   inventoryService.getAll().then((inventory) => setInventory(inventory));
+  // }, []);
 
   const handleRowChange = (event) => {
     event.preventDefault();
     const fieldName = event.target.getAttribute("name");
     const fieldValue = event.target.value;
-
     const newFormData = { ...editInventory };
     newFormData[fieldName] = fieldValue;
-
     setEditInventory(newFormData);
   };
-
   return (
-    <Grid
-      h="200px"
-      templateRows="repeat(2, 1fr)"
-      templateColumns="repeat(5, 1fr)"
-      gap={4}
-    >
-      <GridItem rowSpan={2} colSpan={1}>
-        <Admin inventory={inventory} setInventory={setInventory} />
-      </GridItem>
-      <GridItem colSpan={4} rowSpan={2}>
-        <Inventory
-          inventory={inventory}
-          setInventory={setInventory}
-          setEditInventory={setEditInventory}
-          editInventory={editInventory}
-          handleDelete={handleDelete}
-          handleRowChange={handleRowChange}
-        />
-      </GridItem>
-    </Grid>
+    <QueryClientProvider client={queryClient}>
+      <Grid
+        h="200px"
+        templateRows="repeat(2, 1fr)"
+        templateColumns="repeat(5, 1fr)"
+        gap={4}
+      >
+        <GridItem rowSpan={2} colSpan={1}>
+          <Admin inventory={inventory} setInventory={setInventory} />
+        </GridItem>
+        <GridItem colSpan={4} rowSpan={2}>
+          <Inventory
+            setInventory={setInventory}
+            setEditInventory={setEditInventory}
+            editInventory={editInventory}
+            handleRowChange={handleRowChange}
+          />
+        </GridItem>
+      </Grid>
+    </QueryClientProvider>
   );
 }
 
