@@ -3,7 +3,11 @@ import ReadOnlyRow from "./ReadOnlyRow";
 import EditableRow from "./EditableRow";
 import "../index.css";
 import inventoryService from "../services/inventory";
-import { useInventoryData, useDeleteItem } from "../services/useInventoryData";
+import {
+  useInventoryData,
+  useDeleteItem,
+  useUpdateItem,
+} from "../services/useInventoryData";
 
 import { Table, Thead, Tr, Th, Tbody, Box } from "@chakra-ui/react";
 
@@ -17,14 +21,15 @@ export default function Inventory({
   const [rowId, setRowId] = useState(null);
 
   const onSuccess = (data) => {
-    console.log("Perform side effect after fetching data", data);
+    // console.log("Perform side effect after fetching data", data);
   };
   const onError = (error) => {
-    console.log("Perform side effect after encountering error", error);
+    // console.log("Perform side effect after encountering error", error);
   };
 
   const { isLoading, error, data } = useInventoryData(onSuccess, onError);
   const { mutate: deleteItem } = useDeleteItem();
+  const { mutate: updateItem } = useUpdateItem();
 
   if (isLoading) {
     return <span>Loading...</span>;
@@ -37,14 +42,12 @@ export default function Inventory({
     console.log(data);
     const myInventory = data.data.find((i) => i.id === id);
     if (window.confirm(`Delete ${myInventory.product_name}?`)) {
-      // const filteredInventory = inventory.filter((i) => i.id !== id);
       deleteItem(id, awskey);
-      // setInventory(filteredInventory);
     }
   };
-  const handleEditRowSubmit = async (event) => {
+  const useHandleEditRowSubmit = (event) => {
     event.preventDefault();
-    const editedRow = {
+    const updatedItem = {
       id: rowId,
       image: editInventory.image,
       product_name: editInventory.product_name,
@@ -52,14 +55,16 @@ export default function Inventory({
       location: editInventory.location,
       count: editInventory.count,
     };
+    console.log(updatedItem);
 
-    const result = await inventoryService.update(rowId, editedRow);
-    setInventory(inventory.map((item) => (item.id !== rowId ? item : result)));
+    updateItem(updatedItem, rowId);
+    // const result = await inventoryService.update(rowId, editedRow);
+    // setInventory(inventory.map((item) => (item.id !== rowId ? item : result)));
     setRowId(null);
   };
   return (
     <Box p={4}>
-      <form onSubmit={handleEditRowSubmit}>
+      <form onSubmit={useHandleEditRowSubmit}>
         <Table className="table-spacing" size="sm" p={4}>
           <Thead>
             <Tr>

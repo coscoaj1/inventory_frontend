@@ -14,6 +14,11 @@ const addItem = async (formData) => {
   await axios.post(baseUrl, formData);
 };
 
+const updateItem = async (updatedItem) => {
+  console.log(updatedItem, updatedItem.id);
+  await axios.put(`${baseUrl}/${updatedItem.id}`, updatedItem);
+};
+
 export function useInventoryData(onSuccess, onError) {
   return useQuery("inventory", getAll, { onSuccess, onError });
 }
@@ -32,6 +37,15 @@ export function useAddItem() {
   const queryClient = useQueryClient();
 
   return useMutation(addItem, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["inventory"]);
+    },
+  });
+}
+export function useUpdateItem() {
+  const queryClient = useQueryClient();
+
+  return useMutation(updateItem, {
     onSuccess: () => {
       queryClient.invalidateQueries(["inventory"]);
     },
